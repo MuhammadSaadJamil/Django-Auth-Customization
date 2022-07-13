@@ -13,6 +13,14 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 class Login(LoginView):
     template_name = 'login.html'
+    next_page = reverse_lazy('home')
+    redirect_authenticated_user = True
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['title'] = "Login"
+        data['header'] = 'Login'
+        return data
 
 
 login_ = Login.as_view()
