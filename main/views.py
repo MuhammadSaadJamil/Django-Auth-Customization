@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 
 # Create your views here.
@@ -23,3 +23,10 @@ class Home(CustomLoginRequiredMixin, TemplateView):
 
 
 home_ = Home.as_view()
+
+
+class Logout(LogoutView):
+    next_page = reverse_lazy('LOGIN')
+
+
+logout_ = Logout.as_view()
