@@ -6,7 +6,9 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
+
+from main.forms import SignUpForm
 
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
@@ -105,3 +107,25 @@ class ConfirmPasswordReset(PasswordResetConfirmView):
 
 
 confirm_reset_passwd = ConfirmPasswordReset.as_view()
+
+
+class SignUp(CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy("LOGIN")
+    template_name = "login.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['title'] = "SignUp"
+        data['header'] = 'SignUp'
+        data['button'] = 'SignUp'
+        return data
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.object.is_superuser = True
+        self.object.save()
+        return response
+
+
+sign_up = SignUp.as_view()

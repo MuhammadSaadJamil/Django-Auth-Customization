@@ -24,6 +24,7 @@ urlpatterns = [
     path('', login_, name='LOGIN'),
     path('home', home_, name='home'),
     path('logout', logout_, name='LOGOUT'),
+    path('signup', sign_up, name='sign-up'),
     path('update/passwd', change_password_, name='change-password'),
     path('reset/passwd', reset_passwd, name='reset-password'),
     path('reset/passwd/done/<str:uidb64>/<str:token>', confirm_reset_passwd, name='password_reset_confirm'),

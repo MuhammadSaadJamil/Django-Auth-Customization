@@ -9,6 +9,7 @@
     </form>
     {% if title == 'Login' %}
         <div class="secondary">
+        <h5>Don't Have an account ? <a href="{% url 'sign-up' %}">SignUp Here</a></h5>
             <h5>Forgot Password ? <a href="{% url 'reset-password' %}">Reset Here</a></h5>
         </div>
     {% endif %}
