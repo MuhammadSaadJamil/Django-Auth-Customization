@@ -2,9 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import Permission
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView, PasswordResetView, \
     PasswordResetDoneView, PasswordResetConfirmView
-from django.shortcuts import render
 
-# Create your views here.
 from django.urls import reverse_lazy
 from django.views.generic import TemplateView, CreateView
 
@@ -16,7 +14,7 @@ class CustomLoginRequiredMixin(LoginRequiredMixin):
 
 
 class Login(LoginView):
-    template_name = 'login.html'
+    template_name = 'form.html'
     next_page = reverse_lazy('home')
     redirect_authenticated_user = True
 
@@ -63,7 +61,7 @@ logout_ = Logout.as_view()
 
 
 class ChangePassword(PasswordChangeView):
-    template_name = 'login.html'
+    template_name = 'form.html'
     success_url = reverse_lazy('LOGIN')
 
     def get_context_data(self, **kwargs):
@@ -78,7 +76,7 @@ change_password_ = ChangePassword.as_view()
 
 
 class ResetPassword(PasswordResetView):
-    template_name = 'login.html'
+    template_name = 'form.html'
     email_template_name = 'email_temp.html'
     success_url = reverse_lazy('LOGIN')
     from_email = 'reset@djangoapp.com'
@@ -112,7 +110,7 @@ confirm_reset_passwd = ConfirmPasswordReset.as_view()
 class SignUp(CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy("LOGIN")
-    template_name = "login.html"
+    template_name = "form.html"
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
